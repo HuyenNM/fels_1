@@ -1,0 +1,17 @@
+<% provide(:title, 'All Words') %>
+<h1>Word List</h1>
+  <div id="search">
+    <%= render :partial => 'words/search' %>
+  </div>
+  <ul class="users">
+    <% @words.each do |word| %>
+    <%= render word %>
+    <% end %>
+  </ul>
+  <% if @words.count > 0 %>
+    <p id="pdf_link"><%= link_to "Download Invoice (PDF)", words_path(@words, :format => "pdf") %></p>
+  <% end %>
+  
+
+
+

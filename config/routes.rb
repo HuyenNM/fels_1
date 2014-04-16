@@ -1,4 +1,20 @@
 Fels1::Application.routes.draw do
+
+  root  'layout_pages#home'
+
+  resources :words
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+  match '/help',    to: 'layout_pages#help',    via: 'get'
+  match '/about',   to: 'layout_pages#about',   via: 'get'
+  match '/contact', to: 'layout_pages#contact', via: 'get'
+
+  match '/signup',  to: 'users#new',            via: 'get'
+
+  match '/signin',  to: 'sessions#new',         via: 'get'
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

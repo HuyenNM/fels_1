@@ -1,0 +1,16 @@
+
+<%= form_tag(words_path, :method => "get", id: "search-form") do |f| %>
+  <table>
+     <tr>
+      <td> 
+        Category <%= select_tag 'category', options_from_collection_for_select(Category.all, 'id', 'name', params[:category]), include_blank: true %>
+      </td>
+      <td>
+        Learned <%= radio_button_tag 'status', '1', params[:status] == '1' %>
+        Not Learn <%= radio_button_tag 'status', '-1', params[:status] == '-1' %>
+        All <%= radio_button_tag 'status', '', params[:status] == '' %>
+      </td>
+      <td><%= submit_tag "Search", :name => nil %></td>
+     </tr>
+  </table>
+ <% end %>
