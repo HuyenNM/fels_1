@@ -4,7 +4,7 @@ class CreateWords < ActiveRecord::Migration
       t.integer :status
       t.string :character
       t.string :meaning
-      t.integer :categoryID
+      t.integer :category_id
       t.timestamps
     end
   end
