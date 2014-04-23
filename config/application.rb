@@ -32,6 +32,5 @@ module Fels1
         :margin_left   => '0.5in'
       }
     end
-
   end
 end

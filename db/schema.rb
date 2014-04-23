@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20140414193223) do
     t.integer  "status"
     t.string   "character"
     t.string   "meaning"
-    t.integer  "categoryID"
+    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

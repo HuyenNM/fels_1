@@ -1,0 +1,13 @@
+<li>
+  <span><categoryTitle><%= category.name %></categoryTitle>
+    &nbsp; &nbsp; &nbsp;You'v learned <%= category.words.count(conditions: "status = 1")%> / <%= category.words.count() %>
+  </span>
+</li>
+<li>
+  <ul class="users">
+    <% category.words.each do |word| %>
+      <%= render word %>
+    <% end %>
+  </ul>
+  <%= link_to "Start Lession", lession_path(id: category.id) %>
+</li>
