@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414193223) do
+ActiveRecord::Schema.define(version: 20140429134633) do
+
+  create_table "answers", force: true do |t|
+    t.integer  "option_id"
+    t.integer  "user_id"
+    t.integer  "lession_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "word_id"
+  end
+
+  add_index "answers", ["option_id", "user_id"], name: "index_answers_on_option_id_and_user_id", unique: true
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -19,14 +30,42 @@ ActiveRecord::Schema.define(version: 20140414193223) do
     t.datetime "updated_at"
   end
 
+  create_table "lession_words", force: true do |t|
+    t.integer  "lession_id"
+    t.integer  "word_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lession_words", ["lession_id", "word_id"], name: "index_lession_words_on_lession_id_and_word_id", unique: true
+
+  create_table "lessions", force: true do |t|
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.integer  "user_id"
+  end
+
+  create_table "options", force: true do |t|
+    t.integer  "word_id"
+    t.string   "text"
+    t.boolean  "is_correct", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
   create_table "words", force: true do |t|
     t.integer  "status"

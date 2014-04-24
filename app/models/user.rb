@@ -1,5 +1,9 @@
 
 class User < ActiveRecord::Base  
+  has_many :answers, dependent: :destroy
+  
+  attr_accessor :not_validate_password
+
   before_save { self.email = email.downcase }
   before_create :create_remember_token
   validates :name, presence: true, length: { maximum: 50 }
@@ -8,7 +12,7 @@ class User < ActiveRecord::Base
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, unless: :not_validate_password
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end

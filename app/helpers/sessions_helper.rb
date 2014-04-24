@@ -9,8 +9,10 @@ module SessionsHelper
 
   def sign_in user
     remember_token = User.new_remember_token
-    cookies.permanent[:remember_token] = remember_token    
+    cookies.permanent[:remember_token] = remember_token 
+    user.not_validate_password = true   
     user.update_attributes remember_token: User.hash(remember_token)
+    user.not_validate_password = false
     self.current_user = user
   end
 
@@ -33,7 +35,9 @@ module SessionsHelper
 
   def sign_out
     remember_token = User.new_remember_token
+    current_user.not_validate_password = true
     current_user.update_attributes remember_token: User.hash(remember_token)
+    current_user.not_validate_password = false
     cookies.delete :remember_token
     self.current_user = nil
   end

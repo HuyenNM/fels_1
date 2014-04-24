@@ -1,0 +1,6 @@
+<% provide(:title, 'Lessions') %> 
+  <% if @words.any?	%>
+    <% @words.each do |word| %>
+      <%= render 'lessions/word', word: word, lession_id: @lession.id %>
+    <% end %>
+  <% end %>
