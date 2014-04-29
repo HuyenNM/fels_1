@@ -1,0 +1,16 @@
+   <script>
+   $('.btn-primary').click(function(e){        
+     $(this).closest("form").hide();
+    });
+  </script>
+    <%= form_for [@lession, @answer], remote: true do |f|  %>
+    <p><%= word.character %></p>      
+      <%= f.hidden_field :lession_id, value: lession_id%>
+      <%= f.hidden_field :user_id, value: current_user.id%>    
+      <%= f.hidden_field :word_id, value: word.id%>    
+      <% word.options.each do |option|%>
+        <%= f.radio_button :option_id, option.id %>        
+        <%= f.label option.text %>
+      <% end %>
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    <% end %>

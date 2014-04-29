@@ -2,9 +2,11 @@ Fels1::Application.routes.draw do
 
   root  'layout_pages#home'
   resources :words
-  resources :categories, only: [:index] 
-  resources :lessions, only: [:show] 
+  resources :categories, only: [:index]   
   resources :users
+  resources :lessions do    
+    resources :answers, only: [:create, :index]
+  end
   resources :sessions, only: [:new, :create, :destroy]
   match '/help',    to: 'layout_pages#help',    via: 'get'
   match '/about',   to: 'layout_pages#about',   via: 'get'

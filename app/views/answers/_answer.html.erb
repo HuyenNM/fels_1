@@ -1,0 +1,11 @@
+<% 
+option_corrects = word.options.correct_option  
+option_correct = option_corrects.first unless option_corrects.nil?
+answer_user = current_user.answers.find_by_option_id option_correct.id unless option_correct.nil? %>
+<h1><%= word.character %></h1>
+<%= render 'shared/correct_answer_messages', answer_user: answer_user %>          
+<% word.options.each do |option|%>
+  <% is_checked = option_correct.id == option.id unless answer_user.nil?%>
+  <%= radio_button_tag :option_id, option.id, is_checked%>        
+  <%= label_tag option.text %>
+<% end %>     
