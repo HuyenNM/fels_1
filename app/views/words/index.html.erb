@@ -5,13 +5,14 @@
   </div>
   <ul class="users">
     <% @words.each do |word| %>
-    <%= render word %>
+      <%= render word %>
     <% end %>
+
   </ul>
   <% if @words.count > 0 %>
     <p id="pdf_link"><%= link_to "Download Invoice (PDF)", words_path(@words, :format => "pdf") %></p>
   <% end %>
-  
+
 
 
 

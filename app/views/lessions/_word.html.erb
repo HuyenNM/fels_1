@@ -7,7 +7,8 @@
     <p><%= word.character %></p>      
       <%= f.hidden_field :lession_id, value: lession_id%>
       <%= f.hidden_field :user_id, value: current_user.id%>    
-      <%= f.hidden_field :word_id, value: word.id%>    
+      <%= f.hidden_field :word_id, value: word.id%>  
+      <%= f.hidden_field :category_id, value: word.category_id%>  
       <% word.options.each do |option|%>
         <%= f.radio_button :option_id, option.id %>        
         <%= f.label option.text %>
