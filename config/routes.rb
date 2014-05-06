@@ -8,7 +8,8 @@ Fels1::Application.routes.draw do
     resources :answers, only: [:create, :index]
   end
   namespace :admin do
-    resources :words  
+    resources :words 
+    resources :categories 
   end
   resources :sessions, only: [:new, :create, :destroy]
   match '/help',    to: 'layout_pages#help',    via: 'get'

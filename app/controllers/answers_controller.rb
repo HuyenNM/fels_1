@@ -8,6 +8,6 @@ class AnswersController < ApplicationController
     @answers = @lession.answers
   end
   def answer_params
-    params.require(:answer).permit(:question_id, :option_id, :user_id, :lession_id, :word_id)
+    params.require(:answer).permit(:category_id, :option_id, :user_id, :lession_id, :word_id)
   end
 end

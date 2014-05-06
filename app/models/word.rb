@@ -8,12 +8,18 @@ class Word < ActiveRecord::Base
   validates :meaning, presence: true
   validates :category_id, presence: true
 
-  scope :search, ->(category, status) do 
-    if(!status.nil? && !category.nil?)
-      {:conditions => ['category_id = ? AND status = ?', category, status]}
+  scope :search, ->(category, status, user_id) do 
+    if(!status.nil? && !category.nil?)     
+      word_ids = "SELECT DISTINCT word_id FROM answers
+                  WHERE category_id = #{category} AND user_id = #{user_id}"
+      if(status == "1")
+        where("id IN (#{word_ids})")
+      else 
+        where("id NOT IN (#{word_ids})")
+      end 
     else
-      {:conditions => ['category_id = ? OR status = ?', category, status]}
-    end 
+      where(category_id: category)
+    end
   end
     
   scope :generate_random_words, ->(category_id) do
