@@ -1,3 +1,4 @@
+require 'csv'
 class  Admin::WordsController < ApplicationController
   before_action :set_word, only: [:show, :edit, :update, :destroy]
 
@@ -16,12 +17,20 @@ class  Admin::WordsController < ApplicationController
   def edit
   end
 
-  def create
-    @word = Word.new word_params
-    if @word.save
-      redirect_to admin_word_path(@word), notice: 'Word was successfully created.'        
+  def create    
+    if(params[:type] == "import")
+      file = params[:file]
+        CSV.foreach(file.path, headers: true) do |row|
+          Word.create! row.to_hash
+        end
+      redirect_to admin_words_path, notice: 'Words was successfully import.'
     else
-      render action: 'new' 
+      @word = Word.new word_params
+      if @word.save
+        redirect_to admin_word_path(@word), notice: 'Word was successfully created.'
+      else
+        render action: 'new' 
+      end
     end
   end
 

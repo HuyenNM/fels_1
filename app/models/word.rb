@@ -14,16 +14,24 @@ class Word < ActiveRecord::Base
                   WHERE category_id = #{category} AND user_id = #{user_id}"
       if(status == "1")
         where("id IN (#{word_ids})")
-      else 
+      elsif(status == "-1") 
         where("id NOT IN (#{word_ids})")
+      else
+        where(category_id: category)
       end 
     else
       where(category_id: category)
     end
   end
-    
+  
   scope :generate_random_words, ->(category_id) do
     where(category_id: category_id).order("RANDOM()").limit(5)  
   end  
+
+  scope :not_learned_words, ->(lession_id, user_id) do
+    word_ids = "SELECT word_id FROM answers
+              WHERE lession_id = #{lession_id} AND user_id = #{user_id}"
+    where("words.id NOT IN (#{word_ids})")  
+  end 
 end 
 
