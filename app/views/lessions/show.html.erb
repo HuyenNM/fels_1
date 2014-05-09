@@ -1,6 +1,16 @@
 <% provide(:title, 'Lessions') %> 
-  <% if @words.any?	%>
+  <% if !@words.nil? && @words.any?	%>
+    <span id="breakLine"><categoryTitle><%= @lession.name %></categoryTitle>
+    &nbsp;&nbsp;&nbsp;You've learned 
+    <%= @learned_words_num%>/<%= @lession.words.count%>
+    </span>
     <% @words.each do |word| %>
       <%= render 'lessions/word', word: word, lession_id: @lession.id %>
+    <% end %>
+  <% elsif !@answers.nil? && @answers.any? %>
+    <% @answers.each do |answer| %>
+      <div class="frame">
+        <%= render 'answers/answer', word: Word.find(answer.word_id) %>
+      </div>
     <% end %>
   <% end %>

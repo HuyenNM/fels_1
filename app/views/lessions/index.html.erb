@@ -1,0 +1,8 @@
+<% provide(:title, 'All Words') %>
+<h1>Lession List</h1>
+  <ul class="users">
+    <% @lessions.each do |lession| %> 
+      <%= render lession %>
+    <% end %>
+  </ul>
+ 

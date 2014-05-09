@@ -1,8 +1,19 @@
 class LessionsController < ApplicationController
+  def index
+    @lessions = Lession.all
+  end
+
   def show 
-    @lession = Lession.find params[:id]    
-    @words = @lession.words unless @lession.nil?
-    @answer = Answer.new
+    @lession = Lession.find params[:id]  
+    @learned_words_num = 0  
+    answers_num = @lession.answers.count unless @lession.nil?
+    if(answers_num >= 5)
+      @answers = @lession.answers
+    else
+      @words = @lession.words.not_learned_words @lession.id, current_user.id
+      @learned_words_num = @lession.words.count - @words.count
+      @answer = Answer.new
+    end
   end
  
   def new

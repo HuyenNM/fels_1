@@ -1,8 +1,0 @@
-<% provide(:title, 'Test Result') %> 
-  <% if @answers.any?	%>
-    <% @answers.each do |answer| %>
-    <div class="frame">
-      <%= render 'answer', word: Word.find(answer.word_id) %>
-    </div>
-    <% end %>
-  <% end %>

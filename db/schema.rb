@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506165829) do
+ActiveRecord::Schema.define(version: 20140507170951) do
 
   create_table "answers", force: true do |t|
     t.integer  "option_id"
@@ -22,8 +22,6 @@ ActiveRecord::Schema.define(version: 20140506165829) do
     t.integer  "word_id"
     t.integer  "category_id"
   end
-
-  add_index "answers", ["option_id", "user_id"], name: "index_answers_on_option_id_and_user_id", unique: true
 
   create_table "categories", force: true do |t|
     t.string   "name"
