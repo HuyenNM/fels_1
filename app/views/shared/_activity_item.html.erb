@@ -1,0 +1,9 @@
+<li id="<%= activity.id %>">
+  <%= link_to gravatar_for(current_user), current_user %>
+   <span class="user">
+    <%= link_to current_user.name, current_user %>
+  </span>
+  <span class="title">
+    <%= link_to activity.content << " " << "(" << activity.created_at.to_date.to_s << ")" , activity.lession %>
+  </span>
+</li>

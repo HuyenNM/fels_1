@@ -1,0 +1,8 @@
+<% if !@activities.nil? %>
+    <% @activities.each do |activity| %>
+      <ol class="activities">
+        <%= render 'shared/activity_item', activity: activity %>
+      </ol>
+    <% end %>
+  <%= will_paginate @activities %>
+<% end %>

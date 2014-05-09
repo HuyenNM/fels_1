@@ -1,17 +1,19 @@
-<li>
-  <span><categoryTitle><%= category.name %></categoryTitle>
-    &nbsp;&nbsp;&nbsp;You'v learned 
-    <%= category.words.count(conditions: "status = 1")%>/<%= category.words.count()%>
-  </span>
-  <span><categoryTitle>
-    &nbsp;&nbsp;&nbsp;<%= link_to "Start Lession", 
-    new_lession_path(category_id: category.id) %> </categoryTitle>
-  </span>
-</li>
-<li>
-  <ul class="users">
-    <% category.words.each do |word| %>
-      <%= render word %>
-    <% end %>
-  </ul>
-</li>
+<% if category.words.any? %>
+  <li>
+    <span><categoryTitle><%= category.name %></categoryTitle>
+      &nbsp;&nbsp;&nbsp;You'v learned 
+      <%= category.words.count(conditions: "status = 1")%>/<%= category.words.count()%>
+    </span>
+    <span><categoryTitle>
+      &nbsp;&nbsp;&nbsp;<%= link_to "Start Lession", 
+      new_lession_path(category_id: category.id) %> </categoryTitle>
+    </span>
+  </li>
+  <li>
+    <ul class="users">
+      <% category.words.each do |word| %>
+        <%= render word %>
+      <% end %>
+    </ul>
+  </li>
+<% end %>

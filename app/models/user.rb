@@ -1,7 +1,6 @@
 
 class User < ActiveRecord::Base  
   has_many :answers, dependent: :destroy
-  
   attr_accessor :not_validate_password
 
   before_save { self.email = email.downcase }
